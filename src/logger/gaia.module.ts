@@ -1,11 +1,30 @@
-import { Module, Global, DynamicModule, Provider, Type } from '@nestjs/common'
+import { Module, Global, DynamicModule, Provider, Type, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { GaiaLogerService } from '@src/logger/gaia.service'
 import { GAIA_LOGGER_MODULE_OPTIONS } from '@src/logger/gaia.constants';
 import { GaiaLoggerAsyncOptions, GaiaLoggerOptions, GaiaLoggerOptionsFactory } from '@src/logger/gaia.options.interface';
+import { HttpLoggerMiddleware } from './gaia.middleware';
 
 @Global()
 @Module({})
-export class GaiaLogerModule {
+export class GaiaLogerModule  implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(HttpLoggerMiddleware).forRoutes('*'); // log all routes
+  }
+
+  static register(options: GaiaLoggerOptions): DynamicModule {
+    return {
+      module: GaiaLogerModule,
+      providers: [
+        {
+          provide: 'GAIA_LOGGER_MODULE_OPTIONS',
+          useValue: options,
+        },
+        GaiaLogerService,
+      ],
+      exports: [GaiaLogerService],
+    };
+  }
+
   static forRoot(options: GaiaLoggerOptions): DynamicModule {
     return {
       module: GaiaLogerModule,
