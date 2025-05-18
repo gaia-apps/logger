@@ -2,13 +2,16 @@ import { LogMode } from "../common/enums";
 import { ModuleMetadata, Type } from '@nestjs/common';
 
 export interface GaiaLoggerOptions {
-  isEnabled: boolean
-  mode: LogMode
-  silent: boolean
-  path: string
-  filename: string
-  level: 'debug' | 'info' | 'warn' | 'error' | 'trace';
-  metadata: Object
+  isEnabled?: boolean
+  mode?: LogMode
+  silent?: boolean
+  path?: string
+  filename?: string
+  level?: 'debug' | 'info' | 'warn' | 'error' | 'trace';
+  metadata?: Object,
+  serviceName?: string,
+  environment?: string,
+  http?: boolean,
 }
 
 export interface GaiaLoggerOptionsFactory {
