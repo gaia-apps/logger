@@ -1,7 +1,7 @@
 import { Module, Global, DynamicModule, Provider, Type, NestModule, MiddlewareConsumer } from '@nestjs/common'
-import { GaiaLogerService } from '@src/logger/gaia.service'
-import { GAIA_LOGGER_MODULE_OPTIONS } from '@src/logger/gaia.constants';
-import { GaiaLoggerAsyncOptions, GaiaLoggerOptions, GaiaLoggerOptionsFactory } from '@src/logger/gaia.options.interface';
+import { GaiaLogerService } from './gaia.service'
+import { GAIA_LOGGER_MODULE_OPTIONS } from './gaia.constants';
+import { GaiaLoggerAsyncOptions, GaiaLoggerOptions, GaiaLoggerOptionsFactory } from './gaia.options.interface';
 import { HttpLoggerMiddleware } from './gaia.middleware';
 
 @Global()

@@ -1,13 +1,13 @@
 {
   "name": "@gaia-apps/logger",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Gaia logger",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "publish:github": "npm publish"
+    "publish": "tsc && npm publish"
   },
   "repository": {
     "type": "git",
