@@ -10,8 +10,9 @@ export class GaiaLogerService implements LoggerService {
     protected silent: boolean = true
     protected filename: string = 'system.log'
     protected path: string = './logs'
-    protected levels = ['debug', 'info', 'warn', 'error','trace']
-    protected format = 'json'
+    protected levels = ['debug', 'info', 'warn', 'error']
+    protected level: string = 'info'
+    protected format: string = 'json'
     protected metadata = {}
 
     constructor( 
@@ -23,6 +24,16 @@ export class GaiaLogerService implements LoggerService {
         this.filename = options.filename || this.filename
         this.path = options.path || this.path
         this.metadata = options.metadata || this.metadata
+        this.level = options.level || this.level
+
+        console.log(this.mode);
+        console.log(this.isEnabled);
+        console.log(this.silent);
+        console.log(this.filename);
+        console.log(this.path);
+        console.log(this.metadata);
+        console.log(this.levels);
+        console.log(this.level);
     }
 
     log(message: any, ...optionalParams: any[]) {
