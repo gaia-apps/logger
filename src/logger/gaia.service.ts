@@ -2,8 +2,8 @@ import { Injectable, Inject, LoggerService, LogLevel } from '@nestjs/common'
 import { LogMode } from '../common/enums';
 import { GaiaLoggerOptions } from '../logger/gaia.options.interface';
 import { GAIA_LOGGER_MODULE_OPTIONS } from '../logger/gaia.constants';
-import { GaiaEngineLogger } from '@src/common/engine/engine.interface';
-import { GaiaEngineFactory } from '@src/common/engine/engine';
+import { GaiaEngineLogger } from '../common/engine/engine.interface';
+import { GaiaEngineFactory } from '../common/engine/engine';
 
 @Injectable()
 export class GaiaLogerService implements LoggerService {
