@@ -9,7 +9,7 @@ export class GaiaFileEngine implements GaiaEngineLogger {
 
     constructor(options: any) {
         this.filePath = options?.filePath ?? './var/log';
-        this.fileName = options?.fileName ?? './var/log';
+        this.fileName = options?.filename ?? 'system.log';
     }
 
     static init(options: any): Promise<GaiaEngineLogger> {
@@ -20,7 +20,8 @@ export class GaiaFileEngine implements GaiaEngineLogger {
 
     async write(params: any) {
         const filePath = `${this.filePath}/${(params?.filename ?? this.fileName)}`
-        fs.appendFileSync(filePath, `[File] ${this.formatMessage(params)}\n`);
+        const fd = fs.openSync(filePath, 'a+');
+        fs.appendFileSync(fd, `[File] ${this.formatMessage(params)}\n`);
     }
 
     formatMessage(params: any):string {
