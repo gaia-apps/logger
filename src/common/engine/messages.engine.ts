@@ -9,7 +9,9 @@ export class GaiaMessagesEngine implements GaiaEngineLogger  {
     private readonly queue = 'logger_queue';
 
     async build(options: any) {
-        this.connection = await connect(options?.amqp ?? 'amqp://localhost'); // Use env
+        const url = options?.amqp ?? 'amqp://localhost'
+        console.log(url)
+        this.connection = await connect(url); // Use env
         this.channel = await this.connection.createChannel();
         await this.channel.assertQueue(this.queue, { durable: true });
     }
