@@ -9,7 +9,7 @@ export class GaiaMessagesEngine implements GaiaEngineLogger  {
     private readonly queue = 'logger_queue';
 
     async build(options: any) {
-        const url = options?.amqp ?? 'amqp://localhost'
+        const url = options?.host ?? 'amqp://localhost'
         console.log(url)
         this.connection = await connect(url); // Use env
         this.channel = await this.connection.createChannel();
@@ -17,7 +17,7 @@ export class GaiaMessagesEngine implements GaiaEngineLogger  {
     }
 
     static async init(options: any) {
-        if (!options?.amqp) {
+        if (!options?.host) {
             throw Error('Cannot initialise messages log')
         }
         let engine = new GaiaMessagesEngine()
