@@ -20,7 +20,11 @@ export class GaiaFileEngine implements GaiaEngineLogger {
 
     async write(params: any) {
         const filePath = `${this.filePath}/${(params?.filename ?? this.fileName)}`
+        if (!fs.existsSync(this.filePath)) {
+            fs.mkdirSync(this.filePath, { recursive: true });
+        }
         const fd = fs.openSync(filePath, 'a+');
+        
         fs.appendFileSync(fd, `[File] ${this.formatMessage(params)}\n`);
     }
 

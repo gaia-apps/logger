@@ -11,6 +11,7 @@ export interface GaiaLoggerOptions {
   metadata?: Object,
   serviceName?: string,
   environment?: string,
+  host?: string,
   http?: boolean,
 }
 

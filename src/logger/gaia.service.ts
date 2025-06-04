@@ -16,6 +16,7 @@ export class GaiaLogerService implements LoggerService {
     protected level: 'debug' | 'info' | 'warn' | 'error' | 'trace' = 'info'
     protected format: string = 'json'
     protected metadata = {}
+    protected host = ''
     protected logger: Promise<GaiaEngineLogger>
 
     constructor( 
@@ -28,6 +29,7 @@ export class GaiaLogerService implements LoggerService {
         this.options.path = options.path || this.path
         this.options.metadata = options.metadata || this.metadata
         this.options.level = options.level || this.level
+        this.options.host = options.host || this.host
 
         this.logger = GaiaEngineFactory.getLogger(this.options)
     }
