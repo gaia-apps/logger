@@ -1,11 +1,11 @@
-import { Injectable, NestMiddleware } from '@nestjs/common'
+import { Injectable, Logger, NestMiddleware } from '@nestjs/common'
 import { Request, Response, NextFunction } from 'express'
 
 import { GaiaLogerService } from './gaia.service';
 
 @Injectable()
 export class HttpLoggerMiddleware implements NestMiddleware {
-  constructor(private readonly logger: GaiaLogerService) {}
+  private readonly logger = new Logger(HttpLoggerMiddleware.name);
 
   use(req: Request, res: Response, next: NextFunction) {
     const { method, url } = req;

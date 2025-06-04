@@ -21,7 +21,7 @@ export class GaiaMessagesEngine implements GaiaEngineLogger  {
             throw Error('Cannot initialise messages log')
         }
         let engine = new GaiaMessagesEngine()
-        engine.build(options)   
+        await engine.build(options)   
         return engine
     }
     
