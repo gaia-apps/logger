@@ -3,13 +3,17 @@ import { GaiaEngineLogger } from "./engine.interface";
 import * as fs from "fs";
 
 @Injectable()
-export class GaiaFileEngine implements GaiaEngineLogger {
+export class GaiaFileEngine extends GaiaEngineLogger {
     private readonly filePath: string;
     private readonly fileName: string;
 
     constructor(options: any) {
+        super();
         this.filePath = options?.filePath ?? './var/log';
         this.fileName = options?.filename ?? 'system.log';
+        if (options?.queue) {
+            this.options.queue = options.queue
+        }
     }
 
     static init(options: any): Promise<GaiaEngineLogger> {

@@ -16,20 +16,24 @@ export class GaiaLogerService implements LoggerService {
     protected level: 'debug' | 'info' | 'warn' | 'error' | 'trace' = 'info'
     protected format: string = 'json'
     protected metadata = {}
+    protected options: any = {}
     protected host = ''
     protected logger: Promise<GaiaEngineLogger>
 
     constructor( 
-        @Inject(GAIA_LOGGER_MODULE_OPTIONS) private readonly options: GaiaLoggerOptions
+        @Inject(GAIA_LOGGER_MODULE_OPTIONS) private readonly baseOptions: GaiaLoggerOptions
     ) {
-        this.options.mode = options.mode || this.mode
-        this.options.isEnabled = options.isEnabled || this.isEnabled
-        this.options.silent = options.silent || this.silent
-        this.options.filename = options.filename || this.filename
-        this.options.path = options.path || this.path
-        this.options.metadata = options.metadata || this.metadata
-        this.options.level = options.level || this.level
-        this.options.host = options.host || this.host
+        this.options.env = baseOptions.environment || process.env.ENV
+        this.options.service = baseOptions.serviceName || process.env.SERVICE
+        this.options.level = baseOptions.level || process.env.LOG_LEVEL || this.level
+
+        this.options.mode = baseOptions.mode || this.mode
+        this.options.isEnabled = baseOptions.isEnabled || this.isEnabled
+        this.options.silent = baseOptions.silent || this.silent
+        this.options.filename = baseOptions.filename || this.filename
+        this.options.path = baseOptions.path || this.path
+        this.options.metadata = baseOptions.metadata || this.metadata
+        this.options.host = baseOptions.host || this.host
 
         this.logger = GaiaEngineFactory.getLogger(this.options)
     }
